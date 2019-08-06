@@ -28,7 +28,7 @@ public class CustomerController {
 	@ResponseBody
 	public String sayHi(String c){
 		iDubboRemoteService.sayHello(c);
-		return "success";
+		return "²¿ÊðÍ¨¹ý²âÊÔ";
 	}
 	
 	@RequestMapping(value="data",method=RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
