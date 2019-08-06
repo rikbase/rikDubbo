@@ -4,7 +4,7 @@
     <artifactId>rikDubbo</artifactId>
     <groupId>com.rik</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath></relativePath>
+    <relativePath>..</relativePath>
   </parent>
   <artifactId>dubbo-api-all</artifactId>
   <packaging>war</packaging>
