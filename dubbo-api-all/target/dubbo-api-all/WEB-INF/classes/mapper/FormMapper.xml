@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rik.dubbo.mapper.FormMapper">
+	<resultMap type="com.rik.dubbo.model.FormModel" id="formModelResultMap">
+		<result column="COLUMN_NAME" property="columnName" />
+		<result column="DATA_TYPE" property="dataType" />
+		<result column="CHARACTER_MAXIMUM_LENGTH" property="characterMaximumLength" />
+		<result column="IS_NULLABLE" property="isNullable" />
+		<result column="COLUMN_COMMENT" property="columnComment" />
+	</resultMap>
+	<sql id="columnSql">
+		COLUMN_NAME,DATA_TYPE,CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE,COLUMN_COMMENT
+	</sql>
+	
+	<select id="list" parameterType="com.rik.dubbo.vo.FormModelViewVo" resultMap="formModelResultMap">
+		select
+			<if test="formModelViewVo.columnStr != null and formModelViewVo.columnStr != '' ">#{formModelViewVo.columnStr}</if>
+			<if test="formModelViewVo.columnStr == null or formModelViewVo.columnStr == '' "><include refid="columnSql" /></if>
+		from information_schema.columns
+		<where>
+			<if test="formModelViewVo.formName != null and formModelViewVo.formName != '' ">and TABLE_NAME = #{formModelViewVo.formName}</if>
+		</where>
+	</select>
+	
+	<select id="showDDL" parameterType="java.lang.String" resultType="map">
+		show create table ${formName};
+	</select>
+	
+	<update id="init" parameterType="com.rik.dubbo.vo.FormModelViewVo">
+		SET FOREIGN_KEY_CHECKS=0;
+		DROP TABLE IF EXISTS `#{fromModelViewVo.formName}`;
+		${formModelViewVo.DDL} IF NOT EXISTS `#{fromModelViewVo.formName}`;
+	</update>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/data/mongo
+        http://www.springframework.org/schema/data/mongo/spring-mongo-2.0.xsd">
+	<!-- mongo config -->
+    <!-- Default bean name is 'mongo' -->
+    <mongo:mongo id="mongoData" host="${mongo.ip}" port="${mongo.port}">
+        <mongo:options connections-per-host="${mongo.connections-per-host}"
+            threads-allowed-to-block-for-connection-multiplier="${mongo.threads-allowed-to-block-for-connection-multiplier}"
+            connect-timeout="${mongo.connect-timeout}"
+            max-wait-time="${mongo.max-wait-time}"
+            auto-connect-retry="${mongo.auto-connect-retry}"
+            socket-timeout="${mongo.socket-timeout}"
+            slave-ok="${mongo.slave-ok}"
+            write-number="${mongo.write-number}"
+            write-timeout="${mongo.write-timeout}"
+            write-fsync="${mongo.write-fsync}" />
+    </mongo:mongo>
+    
+	<bean id="rikMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongoData" />
+        <constructor-arg name="databaseName" value="xiaomu_test" />
+        <!-- <constructor-arg ref="userCredentials" /> -->
+    </bean>
+</beans>

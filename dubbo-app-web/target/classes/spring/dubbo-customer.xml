@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<dubbo:application name="rik-consumer"/>	
+    <!-- 使用zookeeper注册中心暴露服务地址 -->  
+    <dubbo:registry address="zookeeper://192.168.233.128:2181" check="true"/> 
+    <dubbo:protocol port="20880"/>
+    <dubbo:consumer check="true" />
+    <dubbo:provider timeout="2000" />
+    <dubbo:annotation package="com.rik.dubbo.controller" />
+    <dubbo:reference id="iDubboRemoteService" interface="com.rik.dubbo.api.IDubboRemoteService"/>
+    <dubbo:reference id="formModelService" interface="com.rik.dubbo.api.FormModelService"/>
+    <dubbo:reference id="dataSrcService" interface="com.rik.dubbo.api.DataSrcService"/>
+    <dubbo:reference id="mongoService" interface="com.rik.dubbo.api.MongoService"/>
+</beans>
