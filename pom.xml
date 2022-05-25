@@ -11,7 +11,7 @@
   	<module>dubbo-app-web</module>
   </modules>
   <properties>	
-		<spring.version>4.3.18.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<org.apache.logging.log4j.version>2.8.2</org.apache.logging.log4j.version>
 		<junit.version>4.12</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
